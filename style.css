@@ -46,8 +46,8 @@ tbody tr:nth-child(odd) td {
 tbody tr:nth-child(even) td {
 	background-color: #e9e9e9;
 }
-.today {
-	background-color: #cccccc;
+tr.today td {
+	background-color: #bbccdd !important;
 }
 .dummy-cell {
 	background-color: transparent;
