@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+	<title>minestamp</title>
+
+	<link rel=stylesheet href="style.css">
+
+	<script src="https://unpkg.com/vue" defer></script>
+	<script src="app.js" defer></script>
+</head>
+
+<body>
+	<main>
+		<table>
+			<thead>
+				<tr><th></th><th rowspan=2>出勤</th><th rowspan=2>退勤</th><th colspan=2>休憩1</th><th colspan=2>休憩2</th><th colspan=2>休憩3</th></tr>
+				<tr><td></td><td>開始</td><td>終了</td><td>開始</td><td>終了</td><td>開始</td><td>終了</td></tr>
+			</thead>
+			<tbody>
+				<tr v-for="record in records" :class="{ today: record.day === new Date().getDate()}">
+					<td>{{ record.day }}日</td>
+					<td>{{ dateToStr(record.start) }}</td>
+					<td>{{ dateToStr(record.end) }}</td>
+					<td>{{ dateToStr(record.break[0].start) }}</td>
+					<td>{{ dateToStr(record.break[0].end) }}</td>
+					<td>{{ dateToStr(record.break[1].start) }}</td>
+					<td>{{ dateToStr(record.break[1].end) }}</td>
+					<td>{{ dateToStr(record.break[2].start) }}</td>
+					<td>{{ dateToStr(record.break[2].end) }}</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<footer>
+			<div v-if="state === 'before-attendance'">
+				<button @click=startWork>出勤</button>
+			</div>
+			<div v-else-if="state === 'working'">
+				<button @click=startBreak>休憩</button>
+				<button @click=endWork>退勤</button>
+			</div>
+			<div v-else-if="state === 'breaking'">
+				<button @click=endBreak>休憩終了</button>
+			</div>
+			<div v-else>
+				おつかれさまでした
+			</div>
+		</footer>
+	</main>
+</body>
+</html>
