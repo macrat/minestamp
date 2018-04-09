@@ -1,5 +1,5 @@
 const vm = new Vue({
-	el: 'main',
+	el: '#app',
 	data() {
 		const now = new Date();
 		const key = `minestamp::${now.getFullYear()}-${('0' + now.getMonth()).slice(-2)}`;
