@@ -53,6 +53,21 @@ const vm = new Vue({
 			}
 			return 'working';
 		},
+		downloadURL() {
+			const month = new Date().getMonth() + 1;
+			const csv = [
+				'日付, 出勤, 退勤, 休憩1 開始, 休憩1 終了, 休憩2 開始, 休憩2 終了, 休憩3 開始, 休憩3 終了,',
+			].concat(this.records.map(row => [
+				`${month}/${row.day}`,
+				this.dateToStr(row.start),
+				this.dateToStr(row.end),
+			].concat(Array.prototype.concat.apply([], row.break.map(b => [
+				this.dateToStr(b.start),
+				this.dateToStr(b.end),
+			]))).join(', ') + ',')).join('\n');
+
+			return URL.createObjectURL(new Blob([csv], {type: 'text/plain'}));
+		},
 	},
 	watch: {
 		records: {

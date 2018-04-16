@@ -15,6 +15,7 @@
 	<div id=app>
 		<header>
 			minestamp <b>{{ new Date().getMonth() + 1 }}月</b>
+			<a :href=downloadURL :download="'minestamp-' + ('0' + (new Date().getMonth() + 1)).slice(-2) + '.csv'">download</a>
 		</header>
 
 		<main>
