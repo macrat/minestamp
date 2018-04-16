@@ -42,6 +42,7 @@ thead th, thead td {
 }
 tbody td {
 	text-align: right;
+	min-width: 5em;
 }
 tbody tr:nth-child(odd) td {
 	background-color: #e0e0e0;
